@@ -26,16 +26,16 @@ Select relevant and novel sentences through similarity measures between sentence
 ##### Order Sentences 
 Order sentences to present a cohesive and coherent discourse. Some approaches include combining chronological ordering of events and topical relatedness of sentences (Barzilay, Elhadad, & McKeown, 2002), or using the Traveling Salesperson algorithm (Althaus, Karamanis, & Koller, 2004).
 ### 2.2.Terminology, Symbols, and Notations
-Sc is a set of sentences in a cluster of documents, Sc = {sc1, sc2, …}, sc Є Sc	
-Ss is a set of sentences in the Summary that are selected from Sc, so Ss = {ss1, ss2, …}, ss Є Ss
-(Sc – Ss) is a set of sentences in Sc minus those in Ss, and sc-s Є (Sc – Ss)
+Sc is a set of sentences in a cluster of documents, Sc = {sc1, sc2, …}, sc Є Sc	 
+Ss is a set of sentences in the Summary that are selected from Sc, so Ss = {ss1, ss2, …}, ss Є Ss   
+(Sc – Ss) is a set of sentences in Sc minus those in Ss, and sc-s Є (Sc – Ss)   
 
-Gc is a set of cluster-signature ngrams representing the cluster documents, Gc = {gc1, gc2, …}, gc Є Gc
-Gd is a set of document-signature ngrams representing a document in the cluster, Gd = {gd1, gd2, …}, Use Gdk for a specific kth document in the cluster   
-Gq is a set of query-signature ngrams representing the user query, Gq = {gq1, gq2,…}
+Gc is a set of cluster-signature ngrams representing the cluster documents, Gc = {gc1, gc2, …}, gc Є Gc   
+Gd is a set of document-signature ngrams representing a document in the cluster, Gd = {gd1, gd2, …}, Use Gdk for a specific kth document in the cluster      
+Gq is a set of query-signature ngrams representing the user query, Gq = {gq1, gq2,…}    
 
-A sentence sc is a set of cluster-signature ngrams selected from Gc, so sc = {gc2, gc7, …..}
-|sc| is the number of cluster-signature ngrams in sentence sc
+A sentence sc is a set of cluster-signature ngrams selected from Gc, so sc = {gc2, gc7, …..}    
+|sc| is the number of cluster-signature ngrams in sentence sc    
 |gc| is the value of cluster-signature ngram calculated through measures such as TF-IDF, Term Frequency, log-likelihood ratios, Latent Dirichlet Allocation (LDA), etc.
 ### 2.3.Maximal Marginal Relevance (MMR)
 MMR summarizes documents based on query-signature (Carbonell & Goldstein, 1998).
