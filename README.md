@@ -23,7 +23,7 @@ Signature ngrams (excluding the stop-words) are salient/informative words and ph
 Score sentences through a formula that uses signature ngrams. 
 ##### Select Sentences
 Select relevant and novel sentences through similarity measures between sentences. Some approaches identify novelty through clustering of sentences into themes and selecting one sentence from each theme (McKeown, Klavans, Hatzivassiloglou, Barzilay, & Eskin, 1999) or generating a composite sentence from each theme (Barzilay, McKeown, & Elhadad, 1999).
-####### Order Sentences 
+##### Order Sentences 
 Order sentences to present a cohesive and coherent discourse. Some approaches include combining chronological ordering of events and topical relatedness of sentences (Barzilay, Elhadad, & McKeown, 2002), or using the Traveling Salesperson algorithm (Althaus, Karamanis, & Koller, 2004).
 ### 2.2. Terminology, Symbols, and Notations
 Sc is a set of sentences in a cluster of documents, Sc = {sc1, sc2, …}, sc Є Sc      	       
@@ -47,7 +47,10 @@ Execution of the above equation results in moving sMMR from set (Sc – Ss) to s
 ### 2.4. MEAD
 MEAD summarizes documents based on cluster-signatures (Radev, Jing, Styś, & Tam, 2004).
 #### 2.4.1. Generate cluster signature
-Group similar documents into same clusters (Radev, Hatzivassiloglou, & McKeown, 1999) based on their TF-IDF values as follows: (1) Represent each document with TF-IDF values of its document-signature unigrams. (2) Represent a centroid of a cluster with TF-IDF values of its cluster-signature unigrams; calculate TF-IDF values as the weighted average of TF-IDF values of document-signature unigrams. (3) Group a new document with a cluster whose centroid is close to TF-IDF values of the document-signature unigrams.
+Group similar documents into same clusters (Radev, Hatzivassiloglou, & McKeown, 1999) based on their TF-IDF values as follows: 
+1. Represent each document with TF-IDF values of its document-signature unigrams. 
+1. Represent a centroid of a cluster with TF-IDF values of its cluster-signature unigrams; calculate TF-IDF values as the weighted average of TF-IDF values of document-signature unigrams. 
+1. Group a new document with a cluster whose centroid is close to TF-IDF values of the document-signature unigrams.
 #### 2.4.2. Score Sentences
 Score each sentence, , in a cluster based on its relevancy score, ωR(si), penalized by its redundancy score, ωN(si). Determine the relevancy score, , as a sum of three features - Centroid score ωg(si), Positional score ωp(si), and the First-sentence overlap score ωf(si). Base the Positional and the First-sentence overlap scores on the assumption that the first sentence in news articles is most relevant. The parameters – θg, θp, θf, - are given equal weights because a learning algorithm is not incorporated. 
 The centroid score, , is the sum of the TF-IDF values of the cluster-signature unigrams in si. It determines the similarity of si with the cluster-signature.
