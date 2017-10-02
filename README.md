@@ -23,9 +23,9 @@ Signature ngrams (excluding the stop-words) are salient/informative words and ph
 Score sentences through a formula that uses signature ngrams. 
 ##### Select Sentences
 Select relevant and novel sentences through similarity measures between sentences. Some approaches identify novelty through clustering of sentences into themes and selecting one sentence from each theme (McKeown, Klavans, Hatzivassiloglou, Barzilay, & Eskin, 1999) or generating a composite sentence from each theme (Barzilay, McKeown, & Elhadad, 1999).
-##### Order Sentences 
+####### Order Sentences 
 Order sentences to present a cohesive and coherent discourse. Some approaches include combining chronological ordering of events and topical relatedness of sentences (Barzilay, Elhadad, & McKeown, 2002), or using the Traveling Salesperson algorithm (Althaus, Karamanis, & Koller, 2004).
-### 2.2.Terminology, Symbols, and Notations
+### 2.2. Terminology, Symbols, and Notations
 Sc is a set of sentences in a cluster of documents, Sc = {sc1, sc2, …}, sc Є Sc      	       
 Ss is a set of sentences in the Summary that are selected from Sc, so Ss = {ss1, ss2, …}, ss Є Ss   
 (Sc – Ss) is a set of sentences in Sc minus those in Ss, and sc-s Є (Sc – Ss)   
@@ -37,18 +37,18 @@ Gq is a set of query-signature ngrams representing the user query, Gq = {gq1, gq
 A sentence sc is a set of cluster-signature ngrams selected from Gc, so sc = {gc2, gc7, …..}    
 |sc| is the number of cluster-signature ngrams in sentence sc    
 |gc| is the value of cluster-signature ngram calculated through measures such as TF-IDF, Term Frequency, log-likelihood ratios, Latent Dirichlet Allocation (LDA), etc.
-### 2.3.Maximal Marginal Relevance (MMR)
+### 2.3. Maximal Marginal Relevance (MMR)
 MMR summarizes documents based on query-signature (Carbonell & Goldstein, 1998).
-#### 2.3.1.Score Sentences
+#### 2.3.1. Score Sentences
 Score each sentence, s, in the cluster by its relevancy score, ωR(s), and its redundancy score, ωN(s). Determine the relevancy score, as a similarity measure (e.g. Cosine) of s with Gq. Determine the redundancy score, , as the similarity measure of s with the maximally redundant summary sentence ss. 
-#### 2.3.2.Select Sentences
-Select the maximum marginal relevant sentence, , that provides the best tradeoff between relevancy and redundancy. The θ parameter controls the tradeoff between relevance and redundancy, and its value is between 0 and 1. Through experiments, the authors suggest a reasonable strategy to select sentences as follows: Start with understanding the novelty of sentences in the region of the query by using a small θ (e.g. θ = 0.3). Then, use a reformulated query via relevance feedback with a large θ (e.g. θ = 0.7) to pick the important sentences.
+#### 2.3.2. Select Sentences
+Select the maximum marginal relevant sentence that provides the best tradeoff between relevancy and redundancy. The θ parameter controls the tradeoff between relevance and redundancy, and its value is between 0 and 1. Through experiments, the authors suggest a reasonable strategy to select sentences as follows: Start with understanding the novelty of sentences in the region of the query by using a small θ (e.g. θ = 0.3). Then, use a reformulated query via relevance feedback with a large θ (e.g. θ = 0.7) to pick the important sentences.
 Execution of the above equation results in moving sMMR from set (Sc – Ss) to set Ss. Executing the equation iteratively continues the moving process until a condition (e.g., minimum relevance threshold is attained, sufficient number of summary sentences is selected) is met that stops the iteration.
-### 2.4.MEAD
+### 2.4. MEAD
 MEAD summarizes documents based on cluster-signatures (Radev, Jing, Styś, & Tam, 2004).
-#### 2.4.1.Generate cluster signature
+#### 2.4.1. Generate cluster signature
 Group similar documents into same clusters (Radev, Hatzivassiloglou, & McKeown, 1999) based on their TF-IDF values as follows: (1) Represent each document with TF-IDF values of its document-signature unigrams. (2) Represent a centroid of a cluster with TF-IDF values of its cluster-signature unigrams; calculate TF-IDF values as the weighted average of TF-IDF values of document-signature unigrams. (3) Group a new document with a cluster whose centroid is close to TF-IDF values of the document-signature unigrams.
-#### 2.4.2.Score Sentences
+#### 2.4.2. Score Sentences
 Score each sentence, , in a cluster based on its relevancy score, ωR(si), penalized by its redundancy score, ωN(si). Determine the relevancy score, , as a sum of three features - Centroid score ωg(si), Positional score ωp(si), and the First-sentence overlap score ωf(si). Base the Positional and the First-sentence overlap scores on the assumption that the first sentence in news articles is most relevant. The parameters – θg, θp, θf, - are given equal weights because a learning algorithm is not incorporated. 
 The centroid score, , is the sum of the TF-IDF values of the cluster-signature unigrams in si. It determines the similarity of si with the cluster-signature.
 The positional score, , assumes that the relevancy of sentences decreases with their distance from the first sentence in the document. The first sentence gets the highest score, equal to the highest centroid score, max[ωg(si)]. Successive sentences receive decreasing scores, and the last sentence (n) in the document has the lowest score of max[ωg(si)]/n. 
