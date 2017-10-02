@@ -52,55 +52,66 @@ Group similar documents into same clusters (Radev, Hatzivassiloglou, & McKeown, 
 1. Represent a centroid of a cluster with TF-IDF values of its cluster-signature unigrams; calculate TF-IDF values as the weighted average of TF-IDF values of document-signature unigrams. 
 1. Group a new document with a cluster whose centroid is close to TF-IDF values of the document-signature unigrams.
 #### 2.4.2. Score Sentences
-Score each sentence, , in a cluster based on its relevancy score, ωR(si), penalized by its redundancy score, ωN(si). Determine the relevancy score, , as a sum of three features - Centroid score ωg(si), Positional score ωp(si), and the First-sentence overlap score ωf(si). Base the Positional and the First-sentence overlap scores on the assumption that the first sentence in news articles is most relevant. The parameters – θg, θp, θf, - are given equal weights because a learning algorithm is not incorporated. 
+Score each sentence, , in a cluster based on its relevancy score, ωR(si), penalized by its redundancy score, ωN(si). Determine the relevancy score, , as a sum of three features - Centroid score ωg(si), Positional score ωp(si), and the First-sentence overlap score ωf(si). Base the Positional and the First-sentence overlap scores on the assumption that the first sentence in news articles is most relevant. The parameters – θg, θp, θf, - are given equal weights because a learning algorithm is not incorporated.
+
 The centroid score, , is the sum of the TF-IDF values of the cluster-signature unigrams in si. It determines the similarity of si with the cluster-signature.
+
 The positional score, , assumes that the relevancy of sentences decreases with their distance from the first sentence in the document. The first sentence gets the highest score, equal to the highest centroid score, max[ωg(si)]. Successive sentences receive decreasing scores, and the last sentence (n) in the document has the lowest score of max[ωg(si)]/n. 
+
 The first-sentence-overlap score, , assumes that the first sentence in the document is most relevant. This score is the inner product of vectors si and s1. Sentences that are more similar to the first sentence receive higher scores.
+
 Determine the redundancy score, , as the product of the redundancy value, sim(si, so), penalized by the value of the highest scoring relevant sentence, max[ωR(si)]. The similarity measure, , includes stop-words and measures the similarity of si with the most relevant and redundant so. Note that sim(si, so) = 1 for identical sentences, and sim(si, so) = 0 for completely novel sentences. 
-#### 2.4.3.Select Sentences
-Select sentences, , similarly to the MMR procedure in Section 2.2.2.
-#### 2.4.4.Order Sentences
+#### 2.4.3. Select Sentences
+Select sentences similarly to the MMR procedure in Section 2.2.2.
+#### 2.4.4. Order Sentences
 Order sentences chronologically by their position within the document and by the dates of the documents.
-### 2.5.CLASSY
+### 2.5. CLASSY
 CLASSY summarizes documents based on query-signatures (Conroy, Schlesinger, Kubina, Rankel, & O’Leary, 2011).
-#### 2.5.1.Sentence Simplification
+#### 2.5.1. Sentence Simplification
 Simplify sentences by removing gerund phrases, relative clause attributives, attributions, many adverbs and all conjunctions, and ages (Conroy, Schlesinger, O’leary, & Goldstein, 2006).
-#### 2.5.2.Generate query- and cluster-signature
+#### 2.5.2. Generate query- and cluster-signature
 Generate cluster-signature by using log-likelihood ratios with a large background corpus and with stop-words included (Conroy, Schlesinger, & O’Leary, 2007). Generate query-signature by extracting unigrams from topic description, and expanding those unigrams by populating all aspects (e.g. when, when, where) of a category (e.g. accident) using Google search, dictionaries and thesauruses (Conroy, Schlesinger, Rankel, & O’Leary, 2010).
-#### 2.5.3.Score sentences
+#### 2.5.3. Score sentences
 Score each sentence, , as an average of the sum of the values of its signature unigrams. The signature unigram value, , is the sum of the query, cluster, and maximum likelihood estimate values. The parameters consist of empirical values based on importance of gq, gc, and gρ. If g is a query-signature then |gq|= 1, otherwise 0. If g is a cluster-signature then |gc|= 1, otherwise 0. The value of gρ, , is the maximum likelihood estimate of the probability that g occurs in the summary; it is calculated from the signature unigram-sentence incidence matrix “A” consisting of “k” top scoring sentences corresponding to columns s1, s2,…,sk.
-#### 2.5.4.Select Sentences
+#### 2.5.4. Select Sentences
 Select most relevant and novel sentences through non-negative (or L1-norm) QR factorization (Conroy & O’Leary, 2001). For update summaries, project the signature unigram-sentence matrix to minimize repetition of information in the base summary.
-#### 2.5.5.Order Sentences
+#### 2.5.5. Order Sentences
  Order selected sentences using the Traveling Salesperson algorithm (Conroy, Schlesinger, O’leary, & Goldstein, 2006), where unigram-overlap measures sentence similarity, and a Monte-Carlo method approximates the solution of this NP-hard problem.
-### 2.6.SumBasic and SumFocus
+### 2.6. SumBasic and SumFocus
 Empirical studies validate that high frequency non-stop ngrams in documents are more likely to appear in human and in top ranking automatic summaries (Nenkova & Vanderwende, 2005). SumBasic exclusively exploits cluster unigram frequencies to generate generic summaries. SumFocus extends SumBasic to include query-focused summarization (Vanderwende L. , Suzuki, Brockett, & Nenkova, 2007) for task-focused summaries where the topic unigrams are highly predictive of the content of the summary.
-#### 2.6.1.Generate query- and cluster-signatures
+#### 2.6.1. Generate query- and cluster-signatures
 The signature unigrams are content ngrams, “g”. The stop-list consists of function words, pronouns, etc. The signature unigrams for SumBasic and SumFocus come from the cluster and from the cluster/query respectively. For SumFocus, the probability that a signature unigram appears in the summary, is the combination of probabilities derived from the query- and the cluster-signature unigrams. The θ parameter controls the tradeoff between assigning a higher weight to query or to cluster probability; its value is between 0 and 1. Empirically, θ = 0.9 because query-signature unigrams have a much higher likelihood of being in summaries. 
+
 The probability derived from the query, is the number of times g occurs in the query divided by the total number of signature unigrams in the query. Smoothing assigns a small probability to signature unigrams that do not appear in the query. The probability derived from the cluster, is the number of times g occurs in the cluster divided by the total number of signature unigrams in the cluster.
-#### 2.6.2.Score Sentences
+#### 2.6.2. Score Sentences
 Score each sentence as an average probability of its signature unigrams.
-#### 2.6.3.Select Sentences
+#### 2.6.3. Select Sentences
 Select sentences as follows:
-1.Calculate ω(s) for all sentences.
-2.Select a sentence with the highest ω(s).
-3.Decrease p(g) of unigrams whose sentence is selected: new[p(g)]= old[p(g)]. old[p(g)]. Reducing the probability of selecting unigrams multiple times enables novelty in the selection process.
-4.Go to Step 1 until a condition (e.g., sufficient number of summary sentences is selected) is met.
-2.6.4.Order Sentences
+1. Calculate ω(s) for all sentences.
+2. Select a sentence with the highest ω(s).
+3. Decrease p(g) of unigrams whose sentence is selected: new[p(g)]= old[p(g)]. old[p(g)]. Reducing the probability of selecting unigrams multiple times enables novelty in the selection process.
+4. Go to Step 1 until a condition (e.g., sufficient number of summary sentences is selected) is met.
+#### 2.6.4. Order Sentences
 There is no consideration for sentence ordering or cohesion. Ordering is a result of the sentence selection process. 
-2.7.LDA based summarization systems
-SumBasic and SumFocus have two major drawbacks. (1) They favor repetition of high frequency signature ngrams in the summary, which reduces the possibility of picking moderately frequent signature ngrams. (2) They do not distinguish between document-specific ngram frequencies concentrated in a document versus the cluster-specific ngram frequencies spread across documents. The Kullback-Lieber (KL) divergence and the LDA-like topic model minimize the former and the latter drawbacks respectively. The KL divergence, , between the target, pT(g), and the approximating, pS(g), distributions is zero when they are identical and strictly positive otherwise. Following are summarization approaches/systems that use LDA or an LDA-derivative to generate cluster- and query-signatures.
-2.7.1.TopicSum for generic summaries
+2.7. LDA based summarization systems
+SumBasic and SumFocus have two major drawbacks. 
+1. They favor repetition of high frequency signature ngrams in the summary, which reduces the possibility of picking moderately frequent signature ngrams.
+2. They do not distinguish between document-specific ngram frequencies concentrated in a document versus the cluster-specific ngram frequencies spread across documents.   
+The Kullback-Lieber (KL) divergence and the LDA-like topic model minimize the former and the latter drawbacks respectively. The KL divergence, , between the target, pT(g), and the approximating, pS(g), distributions is zero when they are identical and strictly positive otherwise. Following are summarization approaches/systems that use LDA or an LDA-derivative to generate cluster- and query-signatures.
+#### 2.7.1. TopicSum for generic summaries
 TopicSum (Topic Summarization) is a generic summarizer (Haghighi & Vanderwende, 2009). The LDA model represents documents as mixtures of latent topics, where a topic is a probability distribution over words. It learns the following three topics: Background, Document-Specific, and Cluster-Specific. The background probability distribution consists of stop-words and other non-content ngrams that appear among all documents. The Document-Specific distribution consists of content ngrams in the document that does not appear in other documents. The Cluster-Specific distribution consists of content ngrams spread across the documents in the cluster. Each sentence is a distribution of three topics. Each unigram position of the sentence has a topic, and a unigram from the topic distribution. TopicSum greedily adds sentences to the summary as long as they decrease KL-divergence between the cluster-specific (target) and the summary (approximate) distributions.
-2.7.2.BayesSum for query-focused summaries
+#### 2.7.2. BayesSum for query-focused summaries
 BayeSum (Bayesian summarization) is a query-focused summarizer (Daumé III & Marcu, 2006). It requires a set of known relevant documents for a given query. A document consists of a mixture of three components: a general English component, a query-specific component, and a document-specific component. Sentences have a continuous probability distribution from each component. Words in a sentence have one of the three components. BayeSum greedily adds sentences to the summary using a strategy similar to MMR (Daumé III & Marcu, 2005).
-2.7.3.DualSum for Update Summaries
+#### 2.7.3. DualSum for Update Summaries
 DualSum modifies TopicSum to generate update summaries of cluster B of recent documents that has information not found in cluster A of earlier documents (Delort & Alfonseca, 2012, April). The LDA model learns the following four topics: Background, Document-Specific, Joint, and Update. The Joint distribution has information common to A and B. The Update distribution has information in B that is not present in A; it is zero for cluster A. 
+
 The target distribution is a mixture of Update and Joint distributions. Empirical results show that the Update distribution alone produces lower results because it disregards generic ngrams about the topic described. A Joint distribution alone produces good results because it includes ngrams from both clusters. A mixture weight of 0.7 for Joint and 0.3 for Update produces the best results. DualSum generates summaries by greedily picking sentences and using KL-divergence. 
-3.Papers and brief write-up on them
-Wang et. al. (2009) propose a Bayesian approach for summarization that does not use KL for re-ranking. In their model, Bayesian Sentence based Topic Models, every sentence in a document is assumed to be associated to a unique latent topic. Once the model parameters have been calculated, a summary is generated by choosing the sentence with the highest probability for each topic.
+## 3.Papers and brief write-up on them
+Wang et. al. (2009) propose a Bayesian approach for summarization that does not use KL for re-ranking. In their model, Bayesian Sentence based Topic Models, every sentence in a document is assumed to be associated to a unique latent topic. Once the model parameters have been calculated, a summary is generated by choosing the sentence with the highest probability for each topic.    
+
 Wallach, H. M. (2006, June). Topic modeling: beyond bag-of-words. In Proceedings of the 23rd international conference on Machine learning (pp. 977-984). ACM.  This article explores a hierarchical generative probabilistic model that incorporates both n-gram statistics and latent topic variables by extending a unigram topic model to include properties of a hierarchical Dirichlet bigram language model.
-Louis, A., & Nenkova, A. (2013). Automatically assessing machine summary content without a gold standard. Computational Linguistics, 39(2), 267-300. http://www.newdesign.aclweb.org/anthology/J/J13/J13-2002.pdf  
+
+Louis, A., & Nenkova, A. (2013). Automatically assessing machine summary content without a gold standard. Computational Linguistics, 39(2), 267-300. <http://www.newdesign.aclweb.org/anthology/J/J13/J13-2002.pdf>    
 This article discusses metrics for summary evaluation when human summaries are not present. On average, the JS divergence measure is highly predictive of summary quality, so it is better than KL divergence. Input–summary similarity based only on word distribution works well for evaluating summaries of cohesive-type inputs. 
 
 Rankel, P. A., Conroy, J. M., Dang, H. T., & Nenkova, A. (2013). A Decade of Automatic Content Evaluation of News Summaries: Reassessing the State of the Art.    How good are automatic content metrics for news summary evaluation?
