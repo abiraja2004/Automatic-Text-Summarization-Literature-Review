@@ -1,15 +1,17 @@
 # Automatic-Text-Summarization-Literature-Review
 Literature review of Automatic Text Summarization
-Automatic Text Summarization, Literature Review
 ## 1. Introduction
 Summaries are produced from single or multiple documents. Single document summarization produces an abstract, outline, or headline. Multiple document summarizations produce a gist of the content of the document-cluster such as news stories on the same event, or a set of web pages on the same topic.  
 
 Summarization types are generic and query-focused/topic-constrained. Generic, summarizes the content of document-cluster. Query-focused and topic-constrained, summarize content based on user preference and the topic respectively. Email threads use topic-constrained because the topic represents it better than its content. Topic-constrained is essentially query-focused, where the topic is the query.  
+
 Summarization methods are abstractive and extractive. Extractive methods emphasize content through extraction of sentences. Extraction identifies important sections of text and produces them verbatim (Das & Martins, 2007), (Sizov, 2010), and (Nenkova & McKeown, 2012). These systems work in general domains and use Information Retrieval techniques to produce superior content with little or no focus on form. Abstractive methods emphasize form, and aim to produce a grammatical and coherent summary, which usually requires advanced language generation techniques. These systems work in strict domains (e.g. news reports on terrorism).   
+
 This document is about multi-document extractive summarization.
-## 2.Related work
+
+## 2. Related work
 Organization of this section is as follows: The first subsection outlines the steps used in summarization. The second subsection introduces the terminology used throughout this document. Subsequent subsections describe four extractive summarization systems. The first, Maximal Marginal Relevance (MMR), is a research paper that pioneered relevance versus novelty. The second system, MEAD, pioneered cluster centroids. The last two systems, Clustering Linguistics AND Statistics Summarization Yield (CLASSY) and SumBasic plus its derivatives, are top scoring in the worldwide TAC (Text Analysis Conference) competition organized by the National Institute of Standards and Technology (NIST).
-### 2.1.Steps in multi-document summarization
+### 2.1. Steps in multi-document summarization
 Multi-document summarization involves multiple sources of information that overlap, contradict, and supplement each other. Following are loosely the steps to select relevant and non-redundant sentences to produce a coherent and complete summary.
 Segment Sentences
 Sentence Segmentation extracts sentences from documents.
