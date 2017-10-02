@@ -17,7 +17,7 @@ Multi-document summarization involves multiple sources of information that overl
 Sentence Segmentation extracts sentences from documents.
 ###### Simplify Sentences
 Sentence simplification trims the redundant parts resulting in shorter/compressed grammatically correct sentences with content equivalent to their larger counterparts. Approaches vary regarding compression methods: some remove appositives and relative clauses from sentences (Blair-Goldensohn, et al., 2004), others develop patterns (Vanderwende, Suzuki, & Brockett, 2006) and compression rules through insights obtained by observing constructions in human-written summaries and lead sentences in stories (Zajic, Dorr, Lin, & Schwartz, 2007). Applying these rules and patterns to parse trees produce multiple compressed candidates for sentences (Toutanova, Brockett, Gamon, Jagarlamudi, Suzuki, & Vanderwende, 2007). Sentence selection algorithms then determine which compressed candidates to pick for the summary. 
-###### Generate signature ngrams
+**Generate signature ngrams**
 Signature ngrams (excluding the stop-words) are salient/informative words and phrases in a document, document-cluster, and query. They can be identified by their frequency of occurrence (Luhn, 1958), by using title/heading as an important clue (Edmundson, 1969), by sentence position (Baxendale, 1958), and by log-likelihood ratios between sets of relevant and non-relevant documents (Dunning, March 1993 ), (Lin & Hovy, 2000). In general, stem the query and signature ngrams in order to identify other related ngrams.
 ###### Score Sentences
 Score sentences through a formula that uses signature ngrams. 
