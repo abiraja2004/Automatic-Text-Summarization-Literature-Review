@@ -26,7 +26,7 @@ Select relevant and novel sentences through similarity measures between sentence
 ##### Order Sentences 
 Order sentences to present a cohesive and coherent discourse. Some approaches include combining chronological ordering of events and topical relatedness of sentences (Barzilay, Elhadad, & McKeown, 2002), or using the Traveling Salesperson algorithm (Althaus, Karamanis, & Koller, 2004).
 ### 2.2.Terminology, Symbols, and Notations
-Sc is a set of sentences in a cluster of documents, Sc = {sc1, sc2, …}, sc Є Sc	 
+Sc is a set of sentences in a cluster of documents, Sc = {sc1, sc2, …}, sc Є Sc      	       
 Ss is a set of sentences in the Summary that are selected from Sc, so Ss = {ss1, ss2, …}, ss Є Ss   
 (Sc – Ss) is a set of sentences in Sc minus those in Ss, and sc-s Є (Sc – Ss)   
 
