@@ -13,17 +13,17 @@ This document is about multi-document extractive summarization.
 Organization of this section is as follows: The first subsection outlines the steps used in summarization. The second subsection introduces the terminology used throughout this document. Subsequent subsections describe four extractive summarization systems. The first, Maximal Marginal Relevance (MMR), is a research paper that pioneered relevance versus novelty. The second system, MEAD, pioneered cluster centroids. The last two systems, Clustering Linguistics AND Statistics Summarization Yield (CLASSY) and SumBasic plus its derivatives, are top scoring in the worldwide TAC (Text Analysis Conference) competition organized by the National Institute of Standards and Technology (NIST).
 ### 2.1. Steps in multi-document summarization
 Multi-document summarization involves multiple sources of information that overlap, contradict, and supplement each other. Following are loosely the steps to select relevant and non-redundant sentences to produce a coherent and complete summary.
-###### Segment Sentences
+##### Segment Sentences
 Sentence Segmentation extracts sentences from documents.
-####### Simplify Sentences
+###### Simplify Sentences
 Sentence simplification trims the redundant parts resulting in shorter/compressed grammatically correct sentences with content equivalent to their larger counterparts. Approaches vary regarding compression methods: some remove appositives and relative clauses from sentences (Blair-Goldensohn, et al., 2004), others develop patterns (Vanderwende, Suzuki, & Brockett, 2006) and compression rules through insights obtained by observing constructions in human-written summaries and lead sentences in stories (Zajic, Dorr, Lin, & Schwartz, 2007). Applying these rules and patterns to parse trees produce multiple compressed candidates for sentences (Toutanova, Brockett, Gamon, Jagarlamudi, Suzuki, & Vanderwende, 2007). Sentence selection algorithms then determine which compressed candidates to pick for the summary. 
-Generate signature ngrams
+###### Generate signature ngrams
 Signature ngrams (excluding the stop-words) are salient/informative words and phrases in a document, document-cluster, and query. They can be identified by their frequency of occurrence (Luhn, 1958), by using title/heading as an important clue (Edmundson, 1969), by sentence position (Baxendale, 1958), and by log-likelihood ratios between sets of relevant and non-relevant documents (Dunning, March 1993 ), (Lin & Hovy, 2000). In general, stem the query and signature ngrams in order to identify other related ngrams.
-Score Sentences
+###### Score Sentences
 Score sentences through a formula that uses signature ngrams. 
-Select Sentences
+###### Select Sentences
 Select relevant and novel sentences through similarity measures between sentences. Some approaches identify novelty through clustering of sentences into themes and selecting one sentence from each theme (McKeown, Klavans, Hatzivassiloglou, Barzilay, & Eskin, 1999) or generating a composite sentence from each theme (Barzilay, McKeown, & Elhadad, 1999).
-Order Sentences 
+###### Order Sentences 
 Order sentences to present a cohesive and coherent discourse. Some approaches include combining chronological ordering of events and topical relatedness of sentences (Barzilay, Elhadad, & McKeown, 2002), or using the Traveling Salesperson algorithm (Althaus, Karamanis, & Koller, 2004).
 ### 2.2.Terminology, Symbols, and Notations
 Sc is a set of sentences in a cluster of documents, Sc = {sc1, sc2, …}, sc Є Sc	
