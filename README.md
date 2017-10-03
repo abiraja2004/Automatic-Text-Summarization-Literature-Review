@@ -1,5 +1,5 @@
 # Automatic-Text-Summarization-Literature-Review
-                Vineet Kumar, Ph.D.
+Vineet Kumar, Ph.D.
 Literature review of Automatic Text Summarization.
 ## 1. Introduction
 Summaries are produced from single or multiple documents. Single document summarization produces an abstract, outline, or headline. Multiple document summarizations produce a gist of the content of the document-cluster such as news stories on the same event, or a set of web pages on the same topic.  
