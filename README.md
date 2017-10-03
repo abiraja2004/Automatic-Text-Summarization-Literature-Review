@@ -62,7 +62,7 @@ The first-sentence-overlap score, , assumes that the first sentence in the docum
 
 Determine the redundancy score, , as the product of the redundancy value, sim(si, so), penalized by the value of the highest scoring relevant sentence, max[ωR(si)]. The similarity measure, , includes stop-words and measures the similarity of si with the most relevant and redundant so. Note that sim(si, so) = 1 for identical sentences, and sim(si, so) = 0 for completely novel sentences. 
 #### 2.4.3. Select Sentences
-Select sentences similarly to the MMR procedure in Section 2.2.2.
+Select sentences similarly to the MMR procedure in Section 2.3.2.
 #### 2.4.4. Order Sentences
 Order sentences chronologically by their position within the document and by the dates of the documents.
 ### 2.5. CLASSY
